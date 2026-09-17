@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/products/custom-six-sweater.jpg",
+        url: "/products/little-butterfly-sweater.jpg",
         width: 1200,
         height: 1500,
-        alt: "Custom embroidered baby sweater by filo.nodo",
+        alt: "Little Butterfly pink crochet sweater by filo.nodo",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.tagline,
-    images: ["/products/custom-six-sweater.jpg"],
+    images: ["/products/little-butterfly-sweater.jpg"],
   },
   robots: {
     index: true,
