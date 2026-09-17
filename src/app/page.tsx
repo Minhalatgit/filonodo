@@ -1,69 +1,104 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ProductCard } from "@/components/ProductCard";
+import { Reveal } from "@/components/Reveal";
+import { SocialLinks } from "@/components/SocialLinks";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { getFeaturedProducts } from "@/data/products";
+import { siteConfig } from "@/data/site";
 
-export default function Home() {
+export default function HomePage() {
+  const featured = getFeaturedProducts();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="relative min-h-[100svh] overflow-hidden bg-linen">
+        <div className="mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-16 pt-28 md:px-8 md:pb-20">
+          <p className="animate-float-in font-display text-5xl leading-none tracking-tight text-ink sm:text-6xl md:text-7xl">
+            {siteConfig.name}
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+          <h1 className="animate-float-in-delay mt-5 max-w-xl font-display text-2xl leading-snug text-ink/85 sm:text-3xl">
+            {siteConfig.tagline}
+          </h1>
+          <p className="animate-float-in-delay-2 mt-4 max-w-md text-base leading-relaxed text-ink/55">
+            {siteConfig.shortDescription}
+          </p>
+          <div className="animate-float-in-delay-2 mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href="/catalog"
+              className="inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm tracking-wide text-cream transition-opacity hover:opacity-90"
+            >
+              View catalog
+            </Link>
+            <WhatsAppButton
+              variant="outline"
+              label="Custom order"
+              message="Hi filo.nodo! I'd like a custom embroidery on clothes."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="surface-soft px-5 py-20 md:px-8 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className="text-xs tracking-[0.18em] uppercase text-ink/40">
+              From the studio
+            </p>
+            <h2 className="mt-3 max-w-lg font-display text-3xl text-ink md:text-4xl">
+              A few pieces to begin with
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 grid gap-10 sm:grid-cols-2">
+            {featured.map((product, index) => (
+              <Reveal key={product.id} delayMs={index * 120}>
+                <ProductCard product={product} />
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-12 text-center">
+            <Link
+              href="/catalog"
+              className="inline-flex text-sm tracking-[0.12em] uppercase text-ink/60 underline decoration-rose/50 underline-offset-8 transition-colors hover:text-ink"
+            >
+              Browse full catalog
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-ink px-5 py-20 text-cream md:px-8 md:py-24">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+          <Reveal className="max-w-xl">
+            <p className="text-xs tracking-[0.18em] uppercase text-cream/45">
+              Made for you
+            </p>
+            <h2 className="mt-3 font-display text-3xl leading-snug md:text-4xl">
+              Custom embroidery available
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-cream/65">
+              Names, dates, motifs — stitched onto clothes or framed as circle pieces.
+              Tell us what you imagine; we&apos;ll craft it by hand.
+            </p>
+          </Reveal>
+          <Reveal delayMs={120}>
+            <WhatsAppButton
+              variant="solid"
+              label="Order on WhatsApp"
+              message="Hi filo.nodo! I'd like to place a custom embroidery order."
+              className="!bg-cream !text-ink hover:!bg-oat"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-t border-ink/10 px-5 py-16 md:px-8">
+        <Reveal className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
+          <p className="font-display text-2xl text-ink">Follow the stitches</p>
+          <SocialLinks />
+        </Reveal>
+      </section>
+    </>
   );
 }
